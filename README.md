@@ -42,20 +42,20 @@ Sistem manajemen sederhana untuk angkringan (warung kecil khas Jawa) menggunakan
 ```
 angkringan/
 ├── config/
-│   └── database.php          # Konfigurasi database
+│   └── database.php          
 ├── includes/
-│   └── navbar.php           # Navigation bar
+│   └── navbar.php           
 ├── assets/
-│   └── style.css           # CSS stylesheet
-├── auth.php                # Sistem autentikasi
-├── index.php              # Dashboard utama
-├── login.php              # Halaman login
-├── logout.php             # Proses logout
-├── menu.php               # Kelola menu (belum dibuat)
-├── pemesanan.php          # Buat pesanan (belum dibuat)
-├── riwayat.php            # Riwayat pesanan (belum dibuat)
-├── laporan.php            # Laporan penjualan
-└── README.md              # Panduan ini
+│   └── style.css           
+├── auth.php                
+├── index.php              
+├── login.php              
+├── logout.php             
+├── menu.php               
+├── pemesanan.php          
+├── riwayat.php            
+├── laporan.php            
+└── README.md              
 ```
 
 ## 🔐 Login Default
