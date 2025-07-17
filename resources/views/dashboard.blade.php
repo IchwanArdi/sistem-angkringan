@@ -1,130 +1,168 @@
 @extends('layouts.app')
 
-@section('title', 'Dashboard - Sistem Angkringan')
-
 @section('content')
-<div class="dashboard-container">
-    <div class="container">
-        <!-- Welcome Section -->
-        <div class="dashboard-card">
-            <div class="row align-items-center">
-                <div class="col-md-8">
-                    <h1 class="mb-2">
-                        <i class="bi bi-speedometer2 text-primary"></i> 
-                        Selamat Datang, {{ Auth::user()->name }}!
-                    </h1>
-                    <p class="text-muted mb-3">
-                        <i class="bi bi-shop"></i> <strong>{{ Auth::user()->angkringan_name }}</strong><br>
-                        <i class="bi bi-geo-alt"></i> {{ Auth::user()->address }}
-                    </p>
-                    <p class="lead">Kelola angkringan Anda dengan mudah melalui sistem ini.</p>
+<div class="container mx-auto px-4 py-6">
+    <div class="mb-6">
+        <h1 class="text-3xl font-bold text-gray-800">Dashboard Angkringan</h1>
+        <p class="text-gray-600 mt-2">Selamat datang, {{ Auth::user()->name }}!</p>
+    </div>
+
+    <!-- Statistik Cards -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <!-- Total Menu -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-blue-500">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-gray-700">Total Menu</h3>
+                    <p class="text-3xl font-bold text-blue-600">{{ $totalMenu }}</p>
                 </div>
-                <div class="col-md-4 text-center">
-                    <div class="bg-primary bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center" 
-                         style="width: 100px; height: 100px;">
-                        <i class="bi bi-shop display-4 text-primary"></i>
-                    </div>
+                <div class="text-blue-500">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Stats -->
-        <div class="row mb-4">
-            <div class="col-md-3 mb-3">
-                <div class="dashboard-card text-center">
-                    <div class="bg-success bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                         style="width: 60px; height: 60px;">
-                        <i class="bi bi-currency-dollar display-6 text-success"></i>
-                    </div>
-                    <h3 class="h4 mb-1">Rp 0</h3>
-                    <p class="text-muted mb-0">Penjualan Hari Ini</p>
+        <!-- Pesanan Hari Ini -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-gray-700">Pesanan Hari Ini</h3>
+                    <p class="text-3xl font-bold text-green-600">{{ $pesananHariIni }}</p>
                 </div>
-            </div>
-            
-            <div class="col-md-3 mb-3">
-                <div class="dashboard-card text-center">
-                    <div class="bg-info bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                         style="width: 60px; height: 60px;">
-                        <i class="bi bi-bag-check display-6 text-info"></i>
-                    </div>
-                    <h3 class="h4 mb-1">0</h3>
-                    <p class="text-muted mb-0">Pesanan Hari Ini</p>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-3">
-                <div class="dashboard-card text-center">
-                    <div class="bg-warning bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                         style="width: 60px; height: 60px;">
-                        <i class="bi bi-menu-button-wide display-6 text-warning"></i>
-                    </div>
-                    <h3 class="h4 mb-1">0</h3>
-                    <p class="text-muted mb-0">Menu Tersedia</p>
-                </div>
-            </div>
-            
-            <div class="col-md-3 mb-3">
-                <div class="dashboard-card text-center">
-                    <div class="bg-danger bg-opacity-10 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" 
-                         style="width: 60px; height: 60px;">
-                        <i class="bi bi-star display-6 text-danger"></i>
-                    </div>
-                    <h3 class="h4 mb-1">-</h3>
-                    <p class="text-muted mb-0">Menu Terlaris</p>
+                <div class="text-green-500">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <!-- Quick Actions -->
-        <div class="dashboard-card">
-            <h2 class="h4 mb-4">
-                <i class="bi bi-lightning"></i> Aksi Cepat
-            </h2>
-            
-            <div class="row">
-                <div class="col-md-4 mb-3">
-                    <a href="#" class="btn btn-outline-primary w-100 p-3 text-start">
-                        <i class="bi bi-plus-circle me-3 fs-4"></i>
-                        <div>
-                            <strong>Tambah Menu</strong>
-                            <p class="mb-0 small text-muted">Tambah menu baru untuk hari ini</p>
-                        </div>
-                    </a>
+        <!-- Pemasukan Hari Ini -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-yellow-500">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-gray-700">Pemasukan Hari Ini</h3>
+                    <p class="text-3xl font-bold text-yellow-600">Rp {{ number_format($pemasukanHariIni, 0, ',', '.') }}</p>
                 </div>
-                
-                <div class="col-md-4 mb-3">
-                    <a href="#" class="btn btn-outline-success w-100 p-3 text-start">
-                        <i class="bi bi-cart-plus me-3 fs-4"></i>
-                        <div>
-                            <strong>Catat Pesanan</strong>
-                            <p class="mb-0 small text-muted">Catat pesanan dari pelanggan</p>
-                        </div>
-                    </a>
-                </div>
-                
-                <div class="col-md-4 mb-3">
-                    <a href="#" class="btn btn-outline-info w-100 p-3 text-start">
-                        <i class="bi bi-graph-up me-3 fs-4"></i>
-                        <div>
-                            <strong>Lihat Laporan</strong>
-                            <p class="mb-0 small text-muted">Lihat laporan penjualan</p>
-                        </div>
-                    </a>
+                <div class="text-yellow-500">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"></path>
+                    </svg>
                 </div>
             </div>
         </div>
 
-        <!-- Recent Activity (placeholder) -->
-        <div class="dashboard-card">
-            <h2 class="h4 mb-4">
-                <i class="bi bi-clock-history"></i> Aktivitas Terbaru
-            </h2>
-            
-            <div class="text-center py-5">
-                <i class="bi bi-inbox display-1 text-muted mb-3"></i>
-                <h3 class="h5 text-muted">Belum ada aktivitas</h3>
-                <p class="text-muted">Mulai dengan menambah menu atau mencatat pesanan pertama Anda.</p>
+        <!-- Total Pemasukan Bulan Ini -->
+        <div class="bg-white rounded-lg shadow-md p-6 border-l-4 border-purple-500">
+            <div class="flex items-center">
+                <div class="flex-1">
+                    <h3 class="text-lg font-semibold text-gray-700">Pemasukan Bulan Ini</h3>
+                    <p class="text-3xl font-bold text-purple-600">Rp {{ number_format($pemasukanBulanIni, 0, ',', '.') }}</p>
+                </div>
+                <div class="text-purple-500">
+                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                    </svg>
+                </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Quick Actions -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <a href="{{ route('menus.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white rounded-lg p-6 text-center transition duration-200">
+            <div class="text-4xl mb-4">🍽️</div>
+            <h3 class="text-xl font-semibold">Tambah Menu Baru</h3>
+            <p class="text-blue-100 mt-2">Tambahkan makanan atau minuman baru</p>
+        </a>
+
+        <a href="{{ route('orders.create') }}" class="bg-green-500 hover:bg-green-600 text-white rounded-lg p-6 text-center transition duration-200">
+            <div class="text-4xl mb-4">📝</div>
+            <h3 class="text-xl font-semibold">Buat Pesanan Baru</h3>
+            <p class="text-green-100 mt-2">Catat pesanan pelanggan baru</p>
+        </a>
+
+        <a href="{{ route('reports.index') }}" class="bg-purple-500 hover:bg-purple-600 text-white rounded-lg p-6 text-center transition duration-200">
+            <div class="text-4xl mb-4">📊</div>
+            <h3 class="text-xl font-semibold">Lihat Laporan</h3>
+            <p class="text-purple-100 mt-2">Analisis penjualan dan keuangan</p>
+        </a>
+    </div>
+
+    <!-- Pesanan Terbaru & Menu Favorit -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- Pesanan Terbaru -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Pesanan Terbaru</h3>
+                <a href="{{ route('orders.index') }}" class="text-blue-600 hover:text-blue-800 text-sm">Lihat Semua</a>
+            </div>
+            @if($pesananTerbaru->count() > 0)
+                <div class="space-y-3">
+                    @foreach($pesananTerbaru as $pesanan)
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="font-medium text-gray-800">#{{ $pesanan->id }}</p>
+                                <p class="text-sm text-gray-600">{{ $pesanan->created_at->format('H:i') }}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-green-600">Rp {{ number_format($pesanan->total_harga, 0, ',', '.') }}</p>
+                                <p class="text-sm text-gray-600">{{ $pesanan->orderItems->count() }} item</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="text-center py-8 text-gray-500">
+                    <p>Belum ada pesanan hari ini</p>
+                </div>
+            @endif
+        </div>
+
+        <!-- Menu Favorit/Terlaris -->
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold text-gray-800">Menu Terlaris</h3>
+                <a href="{{ route('menus.index') }}" class="text-blue-600 hover:text-blue-800 text-sm">Lihat Semua</a>
+            </div>
+            @if($menuTerlaris->count() > 0)
+                <div class="space-y-3">
+                    @foreach($menuTerlaris as $menu)
+                        <div class="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
+                            <div>
+                                <p class="font-medium text-gray-800">{{ $menu->nama_makanan }}</p>
+                                <p class="text-sm text-gray-600">{{ $menu->kategori }}</p>
+                            </div>
+                            <div class="text-right">
+                                <p class="font-semibold text-blue-600">{{ $menu->total_terjual ?? 0 }}x</p>
+                                <p class="text-sm text-gray-600">Rp {{ number_format($menu->harga, 0, ',', '.') }}</p>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="text-center py-8 text-gray-500">
+                    <p>Belum ada data penjualan</p>
+                </div>
+            @endif
+        </div>
+    </div>
+
+    <!-- Grafik Penjualan 7 Hari Terakhir (Optional) -->
+    <div class="mt-8 bg-white rounded-lg shadow-md p-6">
+        <h3 class="text-xl font-semibold text-gray-800 mb-4">Penjualan 7 Hari Terakhir</h3>
+        <div class="h-64 flex items-end justify-between space-x-2">
+            @foreach($penjualan7Hari as $hari)
+                <div class="flex-1 flex flex-col items-center">
+                    <div class="bg-blue-500 rounded-t" style="height: {{ $hari['total'] > 0 ? ($hari['total'] / $maxPenjualan * 200) : 5 }}px; min-height: 5px;"></div>
+                    <div class="mt-2 text-center">
+                        <p class="text-xs text-gray-600">{{ $hari['tanggal'] }}</p>
+                        <p class="text-sm font-semibold">Rp {{ number_format($hari['total'], 0, ',', '.') }}</p>
+                    </div>
+                </div>
+            @endforeach
         </div>
     </div>
 </div>
